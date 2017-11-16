@@ -182,11 +182,10 @@ public class WeatherActivity extends AppCompatActivity {
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
         Intent intent = new Intent(this, AutoUpdateService.class);
-        startActivity(intent);
+        startService(intent);
     }
 
     public void requestWeather(final String weatherId) {
-        this.mWeatherId = weatherId;
         String weatherUrl = "http://guolin.tech/api/weather?cityid=" +
                 weatherId + "&key=bc0418b57b2d4918819d3974ac1285d9";
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
