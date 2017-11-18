@@ -19,7 +19,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="#fff"/>
+        android:textColor="#fff" />
 
     <TextView
         android:id="@+id/max_text"
@@ -28,7 +28,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="right"
-        android:textColor="#fff"/>
+        android:textColor="#fff" />
 
     <TextView
         android:id="@+id/min_text"
@@ -37,6 +37,6 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="right"
-        android:textColor="#fff"/>
+        android:textColor="#fff" />
 
 </LinearLayout>
