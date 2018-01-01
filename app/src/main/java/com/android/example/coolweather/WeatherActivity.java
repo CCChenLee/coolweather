@@ -60,12 +60,14 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
+//        实现状态栏沉浸
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
             decorView.setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }//实现状态栏沉浸
+        }
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navButton = (Button) findViewById(R.id.nav_button);
@@ -90,6 +92,7 @@ public class WeatherActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
 
+//        尝试从SharedPreferences读取缓存的背景图片
         String bingPic = prefs.getString("bing_pic", null);
         if (bingPic != null) {
             Glide.with(this).load(bingPic).into(bingPicImg);
@@ -124,6 +127,7 @@ public class WeatherActivity extends AppCompatActivity {
         });
     }
 
+    //    加载必应每日一图
     private void loadBingPic() {
         String requestBingPic = "http://guolin.tech/api/bing_pic";
         HttpUtil.sendOkHttpRequest(requestBingPic, new Callback() {
@@ -148,6 +152,7 @@ public class WeatherActivity extends AppCompatActivity {
         });
     }
 
+    //    处理并展示Weather实体类中的数据
     private void showWeatherInfo(Weather weather) {
         String cityName = weather.basic.cityName;
         String updateTime = weather.basic.update.updateTime.split(" ")[1];
@@ -185,6 +190,7 @@ public class WeatherActivity extends AppCompatActivity {
         startService(intent);
     }
 
+    //    根据天气id请求城市天气信息
     public void requestWeather(final String weatherId) {
         this.mWeatherId = weatherId;
         String weatherUrl = "http://guolin.tech/api/weather?cityid=" +

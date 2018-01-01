@@ -32,6 +32,10 @@ import okhttp3.Response;
 
 /**
  * Created by 果粒橙 on 2017.10.19.
+ * <p>
+ * 先获取到一些控件的实例，然后初始化ArrayAdapter并设置为ListView的适配器。
+ * <p>
+ * 碎片不能直接显示在界面上，需要添加到活动中去，修改activity_main.xml
  */
 
 public class ChooseAreaFragment extends Fragment {
@@ -74,7 +78,9 @@ public class ChooseAreaFragment extends Fragment {
                 } else if (currentLevel == LEVEL_CITY) {
                     selectedCity = cityList.get(position);
                     queryCounties();
-                } else if (currentLevel == LEVEL_COUNTY) {
+                }
+//如果当前级别是LEVEL_COUNTY就启动WeatherActivity，并将当前选中县的天气id传递过去
+                else if (currentLevel == LEVEL_COUNTY) {
                     String weatherId = countyList.get(position).getWeatherId();
                     if (getActivity() instanceof MainActivity) {
                         Intent intent = new Intent(getActivity(), WeatherActivity.class);
@@ -103,6 +109,7 @@ public class ChooseAreaFragment extends Fragment {
         queryProvinces();
     }
 
+    //    查询全国所有的省，优先从数据库查询，如果没有再去服务器上查询，市县下同
     private void queryProvinces() {
         titleText.setText("中国");
         backButton.setVisibility(View.GONE);
@@ -160,11 +167,13 @@ public class ChooseAreaFragment extends Fragment {
         }
     }
 
+    //    根据传入的地址和类型从服务器上查询省市县数据
     private void queryFromServer(String address, final String type) {
         showProgressDialog();
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+//                通过runOnUIThread()方法回到主线程处理逻辑
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -204,12 +213,14 @@ public class ChooseAreaFragment extends Fragment {
         });
     }
 
+    //    关闭进度对话框
     private void closeProgressDialog() {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
     }
 
+    //    显示进度对话框
     private void showProgressDialog() {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(getActivity());

@@ -16,6 +16,9 @@ import org.json.JSONObject;
 
 /**
  * Created by 果粒橙 on 2017.10.18.
+ * <p>
+ * 先使用JSONArray和JSONObject将数据解析出来，然后组装成实体类对象
+ * 再调用save()方法将数据存储到数据库中
  */
 
 public class Utility {
@@ -85,12 +88,14 @@ public class Utility {
         return false;
     }
 
+    //    将返回的JSON数据解析成Weather实体类
+//    先通过JSONObject和JSONArray将天气数据中的主体内容解析出来
     public static Weather handleWeatherResponse(String response) {
         try {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
             String weatherContent = jsonArray.getJSONObject(0).toString();
-            return new Gson().fromJson(weatherContent,Weather.class);
+            return new Gson().fromJson(weatherContent, Weather.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -5,6 +5,8 @@
     android:background="#fff"
     android:orientation="vertical">
 
+    定义一个头布局作为标题栏，因为碎片中最好不要直接使用ActionBar或Toolbar，否则复用会出问题
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -29,6 +31,7 @@
 
     </RelativeLayout>
 
+    <!--省市县的数据将显示在这里，ListView会自动给每个子项之间添加一条分割线-->
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
