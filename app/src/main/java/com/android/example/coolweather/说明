@@ -34,4 +34,10 @@ aqi.xml作为空气质量信息的布局，suggestion.xml作为生活建议信�
 实现背景图和状态栏融合到一起的效果，加入系统版本号的判断大于或等于21即Android5.0以上
 让系统状态栏留出空间，修改activity_weather.xml借助android:fitsSystemWindows属性为true
 
-第六阶段
+第六阶段添加切换城市功能并能够下拉刷新
+修改activity_weather.xml、WeatherActivity，加入更新天气的处理逻辑，下拉刷新。
+修改头布局title.xml添加按钮，修改activity_weather.xml将碎片放入到滑动菜单中
+需要根据ChooseAreaFragment的不同状态来进行不同的逻辑处理
+
+第七阶段让后台自动更新，新建service-AutoUpdateService
+并在WeatherActivity激活服务

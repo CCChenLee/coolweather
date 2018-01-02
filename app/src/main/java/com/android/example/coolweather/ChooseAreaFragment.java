@@ -82,6 +82,8 @@ public class ChooseAreaFragment extends Fragment {
 //如果当前级别是LEVEL_COUNTY就启动WeatherActivity，并将当前选中县的天气id传递过去
                 else if (currentLevel == LEVEL_COUNTY) {
                     String weatherId = countyList.get(position).getWeatherId();
+//                    判断状态
+//                    instanceof关键字可以判断一个对象是否属于某个类的实例
                     if (getActivity() instanceof MainActivity) {
                         Intent intent = new Intent(getActivity(), WeatherActivity.class);
                         intent.putExtra("weather_id", weatherId);
